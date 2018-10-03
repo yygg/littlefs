@@ -583,7 +583,7 @@ static lfs_stag_t lfs_dir_fetchmatch(lfs_t *lfs,
     for (int i = 0; i < 2; i++) {
         lfs_block_t block = dir->pair[0];
         lfs_off_t off = sizeof(uint32_t);
-        lfs_tag_t ptag = 0xffffffff;
+        lfs_tag_t ptag = 0;
 
         lfs_tag_t tempfoundtag = foundtag;
         lfs_mdir_t temp = {
@@ -1311,8 +1311,8 @@ commit:
 
         // setup commit state
         commit.off = 0;
+        commit.ptag = 0;
         commit.crc = 0xffffffff;
-        commit.ptag = 0xffffffff;
 
         // space is complicated, we need room for tail, crc, globals,
         // cleanup delete, and we cap at half a block to give room

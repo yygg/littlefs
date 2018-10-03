@@ -62,7 +62,7 @@ def main(*blocks):
     print "%-4s  %-8s  %-14s  %3s  %3s  %s" % (
         'off', 'tag', 'type', 'id', 'len', 'dump')
 
-    tag = 0xffffffff
+    tag = 0
     off = 4
     while True:
         try:
