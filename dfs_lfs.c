@@ -527,7 +527,17 @@ _error_dir:
         }
         else
         {
+            file->pos  = lfs_file_tell(dfs_lfs_fd->lfs, &dfs_lfs_fd->u.file);
+            file->size = lfs_file_size(dfs_lfs_fd->lfs, &dfs_lfs_fd->u.file);
             file->data = (void *)dfs_lfs_fd;
+            
+            if (file->flags & O_APPEND)
+            {
+              /* seek to the end of file */
+              lfs_file_seek(dfs_lfs_fd->lfs, &dfs_lfs_fd->u.file,0, LFS_SEEK_END);
+              file->pos = lfs_file_tell(dfs_lfs_fd->lfs, &dfs_lfs_fd->u.file);
+            }
+
             return RT_EOK;
         }
 
